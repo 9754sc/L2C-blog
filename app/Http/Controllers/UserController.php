@@ -19,7 +19,7 @@ class UserController extends Controller
             ])
             ->firstOrFail();
 
-        $posts = $user->posts;
+        $posts = $user->posts()->paginate(5);
 
         return view('posts.index')
             ->with('title', $user->name)

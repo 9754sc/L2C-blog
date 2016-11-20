@@ -35,6 +35,10 @@
         @empty
             <p>...Nothingness...</p>
         @endforelse
+
+
+        {{ $posts->links() }}
+
     </section>
 
 @stop

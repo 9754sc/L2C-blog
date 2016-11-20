@@ -21,7 +21,7 @@ class TagController extends Controller
         $tag = Tag::where('name',$slug)
             ->firstOrFail();
 
-        $posts = $tag->posts;
+        $posts = $tag->posts()->paginate(5);
 
         return view('posts.index')
             ->with('title', $tag->name)
