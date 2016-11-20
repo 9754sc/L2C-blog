@@ -43,31 +43,25 @@ class PostController extends Controller
      */
     public function store(SavePostRequest $request)
     {
-        $post = Auth::user()->posts()->create( $request->all() );
+        $post = $this->createPost($request);
 
-        $post->tags()->sync( $request->get('tags') ?: [] );
+        flash()->success('New post added. How nice...');
 
-        return redirect()->route('post.show', $post->id)
+        return redirect()->route('post.show', $post->slug)
             ->with('message','New post added.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     */
-    public function show($id)
+
+    public function show($slug)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::where('slug', $slug)
+            ->firstOrFail();
 
         return view('posts.show')
             ->with('post', $post);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     */
+
     public function edit($id)
     {
         $post = Post::findOrFail($id);
@@ -78,16 +72,13 @@ class PostController extends Controller
 
         return view('posts.edit')
             ->with('title', 'Edit post')
-            ->with('post', $post)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('post', $post);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(SavePostRequest $request, $id)
     {
@@ -96,20 +87,34 @@ class PostController extends Controller
         $this->authorize('edit-post', $post);
 
         $post->update($request->all() );
-        $post->tags()->sync( $request->get('tags') ?: [] );
+        $this->syncTags($post, $request->get('tags') );
 
-        return redirect()->route('post.show', $post->id)
-            ->with('message','New post added.');
+        return redirect()->route('post.show', $post->slug)
+            ->with('message','Post edited.');
+    }
+
+
+    /**
+     * synchronize tags for this post
+     *
+     * @param $post
+     * @param $tags
+     */
+    private function syncTags($post, $tags)
+    {
+        $post->tags()->sync($tags ?: []);
+//        $post->tags()->sync($request->get('tags') ?: []);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param SavePostRequest $request
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    public function destroy($id)
+    private function createPost(SavePostRequest $request)
     {
-        //
+        $post = Auth::user()->posts()->create($request->all());
+
+        $this->syncTags($post, $request->get('tags'));
+        return $post;
     }
 }

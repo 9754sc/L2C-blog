@@ -24,7 +24,7 @@
             <div class="post-content">
                     {!! $post->RichText !!}
                 <small>- written by
-                    <a href="{{ url('user', $post->user_id) }}">
+                    <a href="{{ url('user', [$post->user_id, $post->user->slug] ) }}">
                         {{ $post->user->name }}
                     </a>
                 </small>

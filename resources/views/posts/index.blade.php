@@ -13,7 +13,7 @@
         @forelse($posts as $post)
             <article id="post-{{ $post->id }}" class="post">
                 <header class="post-header">
-                    <h2><a href="{{ url('post', $post->id) }}">{{ $post->title  }}</a>
+                    <h2><a href="{{ url('post', $post->slug) }}">{{ $post->title  }}</a>
                         <time>
                             <small>/ {{ $post->created_at }}</small>
                         </time>
@@ -28,7 +28,7 @@
                     </p>
                 </div>
                 <footer class="post-footer">
-                    <a href="{{ url('post', $post->id) }}" class="read-more">read more</a>
+                    <a href="{{ url('post', $post->slug) }}" class="read-more">read more</a>
                 </footer>
             </article>
 

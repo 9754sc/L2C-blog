@@ -18,6 +18,18 @@
 
 <header class="container">
 
+
+    @include('partials.error')
+
+
+    @if( session()->has('message') )
+
+        @include('partials.message', [
+            'message' => session('message'),
+            'type' => 'success'])
+
+    @endif
+
     @include('flash::message')
 
     <h1>
@@ -30,7 +42,7 @@
         <nav class="navigation">
             <div class="btn-group btn-group-sm pull-left">
                 <a href="{{ url('post') }}" class="btn btn-default">all posts</a>
-                <a href="{{ url('user/'.Auth::id() ) }}" class="btn btn-default">my posts</a>
+                <a href="{{ url('user', [Auth::id(), Auth::user()->slug] ) }}" class="btn btn-default">my posts</a>
                 <a href="{{ url('post/create') }}" class="btn btn-default">add new</a>
             </div>
 

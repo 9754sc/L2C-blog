@@ -34,10 +34,11 @@ class User extends Authenticatable
 
     public function addNewUser()
     {
-        $result = DB::table('users')->insert([
+        $result = \DB::table('users')->insert([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password
+            'password' => $this->password,
+            'slug' => $this->slug,
         ]);
 
         return $result;

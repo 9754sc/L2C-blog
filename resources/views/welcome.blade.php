@@ -6,7 +6,7 @@
 
     <section class="box post-list">
         <h1 class="box-heading text-muted">
-            Bloooooooog
+            Blog
         </h1>
 
         <p>

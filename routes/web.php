@@ -11,28 +11,11 @@
 |
 */
 
-//Route::get('/', 'PostController@index');
-Route::get('/', [ 'middleware' => 'checkAge', function() {
+Route::get('/', function() {
     return view('welcome');
-} ]);
-
-
-//Route::get('user/{id}', 'UserController@show');
-//Route::get('tag/{id}', 'TagController@show');
-//Route::put('tag/{id}', 'TagController@update');
-
-//Route::get('user/{id}', function ($id) {
-//    $aaa = App\User::findOrFail($id);
-//    return $aaa->posts;
-//});
-
-//Route::get('xxx', 'Auth\LoginController@xxx');
-Route::get('xxx', function () {
-    return 'xxxxx '. auth::user()->name . ' ===';
-});
+} );
 
 Auth::routes();
-
 
 Route::group(['middleware' => 'auth'], function(){
 
@@ -41,13 +24,17 @@ Route::group(['middleware' => 'auth'], function(){
         return redirect()->to('/');
     });
 
+    Route::get('home', 'PostController@index');
+
+//    Route::resource('post', 'PostController', ['except' => 'show']);
     Route::resource('post', 'PostController');
     Route::resource('user', 'UserController');
     Route::resource('tag', 'TagController');
 
-
-//Route::get('/home', 'HomeController@index');
-    Route::get('home', 'PostController@index');
+    // This should be at the bottom as it catches everything
+    Route::get('post/{slug}', ['as' => 'post.show', 'uses' => 'PostController@show']);
+    Route::get('tag/{slug}', ['as' => 'user.show', 'uses' => 'UserController@show']);
+    Route::get('user/{id}/{slug}', ['as' => 'user.show', 'uses' => 'UserController@show']);
 });
 
 
