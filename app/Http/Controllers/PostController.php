@@ -99,6 +99,7 @@ class PostController extends Controller
     public function delete($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('edit-post', $post);
 
         return view('posts.delete')
             ->with('title', 'Delete post')
@@ -108,7 +109,8 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        Auth::user()->posts()->findOrFail($id)->delete();
+        $post = Post::findOrFail($id);
+        $this->authorize('edit-post', $post);
 
         flash()->success("Successfully deleted");
         return redirect('/');

@@ -13,6 +13,10 @@ class SavePostRequest extends FormRequest
      */
     public function authorize()
     {
+        if ( request()->method() == 'PUT' || request()->method() == 'PATCH' ) {
+            return \Auth::user()->posts()->find( request()->segment(2) );
+        }
+
         return \Auth::check();
     }
 
