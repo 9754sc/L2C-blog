@@ -12,7 +12,7 @@
                     
                     @can('edit-post', $post)
                         <a href="{{ route('post.edit', $post->id) }}" class="btn btn-xs edit-link">EDIT</a>
-                        <a href="{{ route('post.edit', $post->id) }}" class="btn btn-xs glyphicon glyphicon-remove"></a>
+                        <a href="{{ route('post.delete', $post->id) }}" class="btn btn-xs glyphicon glyphicon-remove"></a>
                     @endcan
                     
                     <time>

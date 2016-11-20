@@ -47,10 +47,9 @@ class PostController extends Controller
     {
         $post = $this->createPost($request);
 
-        flash()->success('New post added. How nice...');
+        flash()->success('New post added.');
 
-        return redirect()->route('post.show', $post->slug)
-            ->with('message','New post added.');
+        return redirect()->route('post.show', $post->slug);
     }
 
 
@@ -91,9 +90,36 @@ class PostController extends Controller
         $post->update($request->all() );
         $this->syncTags($post, $request->get('tags') );
 
-        return redirect()->route('post.show', $post->slug)
-            ->with('message','Post edited.');
+        flash()->success('Post edited.');
+
+        return redirect()->route('post.show', $post->slug);
     }
+
+
+    public function delete($id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('posts.delete')
+            ->with('title', 'Delete post')
+            ->with('post', $post);
+    }
+
+
+    public function destroy($id)
+    {
+        Auth::user()->posts()->findOrFail($id)->delete();
+
+        flash()->success("Successfully deleted");
+        return redirect('/');
+    }
+
+
+
+
+
+
+
 
 
     /**

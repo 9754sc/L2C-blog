@@ -2,6 +2,15 @@
 
 @include('header')
 
+@include('partials.error')
+
+@if( session()->has('message') )
+
+@include('partials.message', [
+'message' => session('message'),
+'type' => 'success'])
+
+@endif
 
 @yield('content')
 

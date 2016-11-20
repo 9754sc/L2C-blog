@@ -28,13 +28,17 @@ Route::group(['middleware' => 'auth'], function(){
 
 //    Route::resource('post', 'PostController', ['except' => 'show']);
     Route::resource('post', 'PostController');
-    Route::resource('user', 'UserController');
-    Route::resource('tag', 'TagController');
-
-    // This should be at the bottom as it catches everything
+    Route::get('post/{post}/delete', ['as' => 'post.delete', 'uses' => 'PostController@delete']);
     Route::get('post/{slug}', ['as' => 'post.show', 'uses' => 'PostController@show']);
-    Route::get('tag/{slug}', ['as' => 'user.show', 'uses' => 'UserController@show']);
+
+
+    Route::resource('user', 'UserController');
     Route::get('user/{id}/{slug}', ['as' => 'user.show', 'uses' => 'UserController@show']);
+
+
+    Route::resource('tag', 'TagController');
+    Route::get('tag/{slug}', ['as' => 'user.show', 'uses' => 'UserController@show']);
+
 });
 
 
