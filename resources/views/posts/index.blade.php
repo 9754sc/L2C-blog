@@ -34,10 +34,12 @@
 
         @empty
             <p>...Nothingness...</p>
+
         @endforelse
 
-
-        {{ $posts->links() }}
+        @if( count($posts) )
+            {{ $posts->links() }}
+        @endif
 
     </section>
 

@@ -41,4 +41,10 @@ Route::group(['middleware' => 'auth'], function(){
 
 });
 
+// oAuth
+//
+//Route::get('auth/{service}', 'Auth/AuthController@redirectToProvider')
+//    ->where('service', '(github|facebook)');
+//Route::get('auth/{service}/callback', 'Auth/AuthController@handleProviderCallback')
+//    ->where('service', '(github|facebook)');
 

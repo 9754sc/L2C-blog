@@ -18,8 +18,11 @@ class UserController extends Controller
             ['id', $id]
             ])
             ->firstOrFail();
-
-        $posts = $user->posts()->latest()->paginate(5);
+        if ( $user->posts()->first() ) {
+            $posts = $user->posts()->latest()->paginate(5);
+        }else{
+            $posts = [];
+        }
 
         return view('posts.index')
             ->with('title', $user->name)

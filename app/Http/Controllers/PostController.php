@@ -112,6 +112,8 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $this->authorize('edit-post', $post);
 
+        $post->delete();
+
         flash()->success("Successfully deleted");
         return redirect('/');
     }

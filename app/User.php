@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'slug'
     ];
 
     /**
@@ -32,17 +32,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
-    public function addNewUser()
-    {
-        $result = \DB::table('users')->insert([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password,
-            'slug' => $this->slug,
-        ]);
-
-        return $result;
-    }
+//    public function addNewUser()
+//    {
+//        $result = \DB::table('users')->insert([
+//            'name' => $this->name,
+//            'email' => $this->email,
+//            'password' => $this->password,
+////            'slug' => $this->slug,
+//        ]);
+//
+//        return $result;
+//    }
 
     public function setNameAttribute($value)
     {
