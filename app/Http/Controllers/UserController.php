@@ -11,7 +11,7 @@ use App\User;
 class UserController extends Controller
 {
 
-    public function show($id, $slug)
+    public function show($id, $slug = null )
     {
         $user = User::where([
             ['slug', $slug],

@@ -1,4 +1,5 @@
-@extends('layouts.app')
+
+@extends('master')
 
 @section('content')
 <div class="container">
@@ -57,6 +58,13 @@
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     Forgot Your Password?
                                 </a>
+
+                            </div>
+                            <div class="col-md-8 col-md-offset-4">
+
+                                <a href="{{ url('/register') }}" class="btn btn-link">Register</a>
+                                <a href="{{ url('auth/github') }}" class="btn btn-github">GitHub</a>
+                                <a href="{{ url('auth/facebook') }}" class="btn btn-facebook">Facebook</a>
                             </div>
                         </div>
                     </form>
