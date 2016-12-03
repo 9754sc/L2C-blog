@@ -11,13 +11,14 @@
 |
 */
 
-    Route::get('/', function() {
+Route::group(['middleware' => 'language'], function() {
+    Route::get('/', function () {
         return view('welcome');
-    } );
+    });
 
     Auth::routes();
 
-    Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => 'auth'], function () {
 
         Route::get('logout', function () {
             Auth::logout();
@@ -26,7 +27,7 @@
 
         Route::get('home', 'PostController@index');
 
-    //    Route::resource('post', 'PostController', ['except' => 'show']);
+        //    Route::resource('post', 'PostController', ['except' => 'show']);
         Route::resource('post', 'PostController');
         Route::get('post/{post}/delete', ['as' => 'post.delete', 'uses' => 'PostController@delete']);
         Route::get('post/{slug}', ['as' => 'post.show', 'uses' => 'PostController@show']);
@@ -47,5 +48,6 @@
     Route::get('auth/{service}/callback', 'Auth\AuthController@handleProviderCallback')
         ->where('service', '(github|facebook)');
 
-    //Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
-    //Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('lang/{lang}', 'Auth\AuthController@setLanguage');
+
+});

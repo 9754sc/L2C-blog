@@ -21,7 +21,15 @@ class Post extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return date('j M Y, G:i', strtotime($value));
+        switch (\App::getLocale()){
+            case 'sk' :
+                return date('\d\ň\a j. m. Y \o G:i', strtotime($value));
+                break;
+            default :
+                return date('j M Y, G:i', strtotime($value));
+                break;
+        }
+
     }
 
     public function getTeaserAttribute()

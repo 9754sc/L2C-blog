@@ -1,7 +1,5 @@
 <?php
-
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -12,16 +10,15 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'   => 'Prihlasovacie údaje nie sú správne.',
+    'throttle' => 'Prekročený limit pokusov. Skúste znovu o :seconds sekúnd.',
 
     // login form
-    'login' => 'Login',
-    'email' => 'Email@address',
-    'password' => 'Password',
-    'remember_me' => 'Remember me',
-    'alt_login' => ':link_1 or :link_2 or :link_3',
-    'create_account' => 'Register',
+    'login' => 'Prihlásenie',
+    'email' => 'Emailová@adresa',
+    'password' => 'Heslo',
+    'remember_me' => 'Zapametaj si ma',
+    'alt_login' => ':link_1 alebo :link_2 alebo :link_3',
+    'create_account' => 'Zaregistruj sa',
 
 ];

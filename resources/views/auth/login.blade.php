@@ -6,13 +6,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">{{trans('auth.login')}}</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">{{trans('auth.email')}}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">{{trans('auth.password')}}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -43,7 +43,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember"> Remember Me
+                                        <input type="checkbox" name="remember">{{trans('auth.remember_me')}}
                                     </label>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Login
+                                    {{trans('auth.login')}}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
@@ -61,10 +61,12 @@
 
                             </div>
                             <div class="col-md-8 col-md-offset-4">
+                                {{trans('auth.alt_login',[
+                                'link_1' => '<a href="'.url('/register').'" class="btn btn-link">'.trans('auth.create_account').'</a>',
+                                'link_2' => '<a href="'.url('auth/github').'" class="btn btn-github">GitHub</a>',
+                                'link_3' => '<a href="'.url('auth/facebook').'" class="btn btn-facebook">Facebook</a>',
+                                ])}}
 
-                                <a href="{{ url('/register') }}" class="btn btn-link">Register</a>
-                                <a href="{{ url('auth/github') }}" class="btn btn-github">GitHub</a>
-                                <a href="{{ url('auth/facebook') }}" class="btn btn-facebook">Facebook</a>
                             </div>
                         </div>
                     </form>
